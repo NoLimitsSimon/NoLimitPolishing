@@ -22,6 +22,13 @@ const reviews = [
     stars: 5,
   },
   {
+    name: "Jaxon L.",
+    location: "Texas",
+    text: "Best in the game.",
+    service: "Wheel Polishing",
+    stars: 5,
+  },
+  {
     name: "Jose Munoz",
     location: "Texas",
     text: "Called him with no heads up and he fit me in! Competitive prices and an all around great polisher, one of the best in the game. Quick response and quality work! If your wheels are looking yellow or curbed like mine did I highly recommend y'all give him a try!",

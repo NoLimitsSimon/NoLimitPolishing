@@ -5,7 +5,7 @@ const reviews = [
   { name: "Kacen E.",   text: "Duffy has always done an amazing job on my wheels and also good service and fair pricing.", stars: 5 },
   { name: "Hayden",    text: "Easy to deal with. Real good work. Best in the game!",                     stars: 5 },
   { name: "Jose Munoz", text: "Called him with no heads up and he fit me in! Competitive prices and an all around great polisher, one of the best in the game. Quick response and quality work! If your wheels are looking yellow or curbed like mine did I highly recommend y'all give him a try!", stars: 5 },
-  { name: "Carlos R.", text: "Texted a photo, got a quote fast, picked them up looking insane.",          stars: 5 },
+  { name: "Jaxon L.",  text: "Best in the game.",                                                        stars: 5 },
   { name: "Derek H.",  text: "Different level from any other shop I've used. Stealth Forged wheels are fire.", stars: 5 },
   { name: "Anthony L.","text": "Stock wheels polished mirror clean. Never going anywhere else.",           stars: 5 },
 ];
