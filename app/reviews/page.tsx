@@ -8,45 +8,24 @@ export const metadata = {
 
 const reviews = [
   {
-    name: "Jake M.",
-    location: "College Station, TX",
-    text: "Brought in my American Force wheels that had been sitting outside for two years — full oxidation, brake dust caked on, the works. Got them back looking better than the day I bought them. The mirror finish on the inside of the barrel caught me completely off guard. Didn't even ask for that. Highly recommend.",
-    service: "Full Sand & Polish",
+    name: "Kacen E.",
+    location: "Texas",
+    text: "Duffy has always done an amazing job on my wheels and also good service and fair pricing.",
+    service: "Wheel Polishing",
     stars: 5,
   },
   {
-    name: "Trey W.",
-    location: "Houston, TX",
-    text: "I had pretty bad curb rash on two of my KG1s and honestly thought I was gonna have to replace the lips. Dropped them off and No Limit fixed everything — sanded out the damage, brought the finish back, and re-engraved the lettering that got scraped off. Couldn't tell anything had ever happened to them.",
-    service: "Curb Rash Repair",
+    name: "Hayden",
+    location: "Texas",
+    text: "Easy to deal with. Real good work. Best in the game!",
+    service: "Wheel Polishing",
     stars: 5,
   },
   {
-    name: "Marcus D.",
-    location: "Katy, TX",
-    text: "Went with the acid wash first to see what we were working with on my stock dually wheels. The results were better than I expected — dude stripped all that nasty oxidation and road grime off clean. Ended up going back for the full sand and polish on two more sets. Consistently great work.",
-    service: "Acid Wash & Polish",
-    stars: 5,
-  },
-  {
-    name: "Carlos R.",
-    location: "Bryan, TX",
-    text: "Super straightforward process. Texted a photo of my wheels, got a quote fast, dropped them off, and had them back looking insane. No upselling, no BS. Just great work done right. The inside of the barrel on my Forgiatos is now mirror — didn't even know that was possible on a wheel that old.",
-    service: "Full Sand & Polish",
-    stars: 5,
-  },
-  {
-    name: "Derek H.",
-    location: "Sugar Land, TX",
-    text: "I've been to other polishing shops before and the results were never quite there. No Limit is a completely different level. You can tell they actually care about the finish and don't rush the job. My Stealth Forged wheels look absolutely wild. Will never go anywhere else.",
-    service: "Full Sand & Polish",
-    stars: 5,
-  },
-  {
-    name: "Anthony L.",
-    location: "College Station, TX",
-    text: "Got a set of stock aluminum wheels polished on a budget and still walked away blown away. Didn't expect much from stock wheels but the transformation was real. You could see your reflection in them. Great communication throughout and the price was fair for what I got.",
-    service: "Acid Wash & Polish",
+    name: "Jose Munoz",
+    location: "Texas",
+    text: "Called him with no heads up and he fit me in! Competitive prices and an all around great polisher, one of the best in the game. Quick response and quality work! If your wheels are looking yellow or curbed like mine did I highly recommend y'all give him a try!",
+    service: "Wheel Polishing",
     stars: 5,
   },
 ];
@@ -111,9 +90,9 @@ export default function ReviewsPage() {
             Your feedback means everything. Drop a review on Google or hit us on Instagram.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="https://www.instagram.com/no_limit_polishing/" target="_blank" rel="noopener noreferrer"
+            <a href="https://g.page/r/CRBiPRF78iFOECE/review" target="_blank" rel="noopener noreferrer"
               className="border border-black/10 hover:border-[#1e90ff] hover:text-[#1e90ff] text-black font-bold text-sm px-8 py-4 rounded tracking-widest uppercase transition-all duration-200">
-              Tag Us on Instagram
+              Leave a Google Review
             </a>
             <Link href="/contact" className="glow-btn bg-[#1e90ff] text-white font-black text-sm px-8 py-4 rounded tracking-widest uppercase">
               Book an Appointment
