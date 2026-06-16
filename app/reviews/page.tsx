@@ -22,6 +22,13 @@ const reviews = [
     stars: 5,
   },
   {
+    name: "Aryan M.",
+    location: "Texas",
+    text: "Always keeps my wheels looking sharp. Thx!",
+    service: "Wheel Polishing",
+    stars: 5,
+  },
+  {
     name: "Jaxon L.",
     location: "Texas",
     text: "Best in the game.",
