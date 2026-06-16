@@ -22,6 +22,13 @@ const reviews = [
     stars: 5,
   },
   {
+    name: "Colten M.",
+    location: "Texas",
+    text: "No Limit Polishing made my Alcoas shine better than the day they left the factory. Highly recommend — flexible with schedule, dedicated to the craft and the hustle!",
+    service: "Wheel Polishing",
+    stars: 5,
+  },
+  {
     name: "Aryan M.",
     location: "Texas",
     text: "Always keeps my wheels looking sharp. Thx!",
