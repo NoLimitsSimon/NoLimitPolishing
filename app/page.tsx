@@ -84,7 +84,7 @@ export default function Home() {
     <>
       {/* ── HERO ── */}
       <section className="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden">
-        <video className="absolute inset-0 w-full h-full object-cover" src="/videos/hero.mov" autoPlay muted loop playsInline />
+        <video className="absolute inset-0 w-full h-full object-cover" src="https://res.cloudinary.com/ddamtvtt0/video/upload/hero_irchql" autoPlay muted loop playsInline />
         <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/95" />
         <ParticleField />
 

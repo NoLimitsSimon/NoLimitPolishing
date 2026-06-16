@@ -17,7 +17,7 @@ export default function VideoClip() {
   return (
     <video
       ref={ref}
-      src="/videos/work.mov"
+      src="https://res.cloudinary.com/ddamtvtt0/video/upload/baseball-bat_rwmfw4"
       autoPlay
       muted
       loop
