@@ -62,6 +62,9 @@ export const metadata: Metadata = {
     follow: true,
     googleBot: { index: true, follow: true, "max-image-preview": "large" },
   },
+  verification: {
+    google: "iWN8aSB_3e63MjldmmHm94h4P8VuFk5_35XrkqlE7Mg",
+  },
 };
 
 const localBusinessSchema = {
