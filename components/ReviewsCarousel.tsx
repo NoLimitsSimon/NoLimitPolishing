@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from "react";
 
 const reviews = [
   { name: "Kacen E.",   text: "Duffy has always done an amazing job on my wheels and also good service and fair pricing.", stars: 5 },
-  { name: "Trey W.",   text: "Fixed my curb rash and re-engraved the lip. Looked factory fresh.",        stars: 5 },
+  { name: "Hayden",    text: "Easy to deal with. Real good work. Best in the game!",                     stars: 5 },
   { name: "Marcus D.", text: "Acid washed my stock dually wheels — couldn't believe the difference.",     stars: 5 },
   { name: "Carlos R.", text: "Texted a photo, got a quote fast, picked them up looking insane.",          stars: 5 },
   { name: "Derek H.",  text: "Different level from any other shop I've used. Stealth Forged wheels are fire.", stars: 5 },
