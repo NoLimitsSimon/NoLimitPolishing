@@ -2,7 +2,7 @@
 import { useState, useEffect, useRef } from "react";
 
 const reviews = [
-  { name: "Jake M.",    text: "They brought my American Forces back to life. Best in the game.",          stars: 5 },
+  { name: "Kacen E.",   text: "Duffy has always done an amazing job on my wheels and also good service and fair pricing.", stars: 5 },
   { name: "Trey W.",   text: "Fixed my curb rash and re-engraved the lip. Looked factory fresh.",        stars: 5 },
   { name: "Marcus D.", text: "Acid washed my stock dually wheels — couldn't believe the difference.",     stars: 5 },
   { name: "Carlos R.", text: "Texted a photo, got a quote fast, picked them up looking insane.",          stars: 5 },
