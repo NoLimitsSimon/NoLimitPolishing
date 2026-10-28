@@ -10,6 +10,8 @@ const nextConfig: NextConfig = {
     return [
       // www isn't attached to the Vercel project; if it ever is, send it to apex.
       { source: "/:path*", has: [{ type: "host", value: "www.nolimitpolishing.com" }], destination: "https://nolimitpolishing.com/:path*", permanent: true },
+      // Old Vercel URL had been indexed since June; consolidate it onto the real domain.
+      { source: "/:path*", has: [{ type: "host", value: "no-limit-polishing.vercel.app" }], destination: "https://nolimitpolishing.com/:path*", permanent: true },
     ];
   },
   async headers() {
