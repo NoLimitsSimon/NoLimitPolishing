@@ -1,139 +1,118 @@
-import type { Metadata } from "next";
-import { Geist } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+// Self-hosted via the `geist` package: next/font/google needs network access at
+// build time and fails the whole build when fonts.googleapis.com is unreachable.
+import { GeistSans } from "geist/font/sans";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ChatWidget from "@/components/ChatWidget";
+import AccessibilityWidget from "@/components/AccessibilityWidget";
+import MobileCallBar from "@/components/MobileCallBar";
+import SkipLink from "@/components/SkipLink";
+import JsonLd from "@/components/JsonLd";
+import { siteConfig, businessId, defaultOgImage, telHref } from "@/lib/data/site";
+import { services } from "@/lib/data/services";
 
-const geist = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
+const homeTitle = "Aluminum Wheel Polishing in Sealy, TX | No Limit Polishing";
+
+export const viewport: Viewport = { themeColor: "#050505" };
 
 export const metadata: Metadata = {
-  title: {
-    default: "No Limit Polishing | Aluminum Wheel Polishing — College Station & Houston TX",
-    template: "%s | No Limit Polishing",
-  },
-  description:
-    "No Limit Polishing — professional aluminum wheel polishing in College Station & Houston, TX. Machine sand & polish, acid wash, ceramic coating, curb rash repair, powder coat removal. Mirror finish guaranteed. Get a free quote.",
-  keywords: [
-    "aluminum wheel polishing",
-    "wheel polishing Houston TX",
-    "wheel polishing College Station TX",
-    "wheel polishing near me",
-    "curb rash repair Houston",
-    "curb rash repair College Station",
-    "acid wash wheels Texas",
-    "ceramic coating wheels",
-    "forged wheel polish",
-    "mirror finish wheels",
-    "powder coat removal",
-    "wheel restoration Texas",
-    "polished wheels Houston",
-    "wheel buffing near me",
-    "rim polishing Texas",
-  ],
-  authors: [{ name: "No Limit Polishing" }],
-  creator: "No Limit Polishing",
-  metadataBase: new URL("https://www.nolimitpolishing.com"),
-  alternates: { canonical: "/" },
-  openGraph: {
-    title: "No Limit Polishing | Aluminum Wheel Polishing TX",
-    description: "Professional aluminum wheel polishing in College Station & Houston, TX. Mirror finish guaranteed.",
-    url: "https://www.nolimitpolishing.com",
-    siteName: "No Limit Polishing",
-    images: [
-      {
-        url: "/images/img5.jpg",
-        width: 1200,
-        height: 630,
-        alt: "No Limit Polishing — Mirror finish aluminum wheels",
-      },
-    ],
-    locale: "en_US",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "No Limit Polishing | Aluminum Wheel Polishing TX",
-    description: "Professional aluminum wheel polishing in College Station & Houston, TX.",
-    images: ["/images/img5.jpg"],
-  },
+  metadataBase: new URL(siteConfig.url),
+  title: { default: homeTitle, template: `%s | ${siteConfig.name}` },
+  description: siteConfig.description,
+  // `keywords` removed: ignored by Google, a stuffing signal to Bing, and it
+  // published a College Station / Houston keyword list on every page.
+  authors: [{ name: siteConfig.name }],
   robots: {
     index: true,
     follow: true,
     googleBot: { index: true, follow: true, "max-image-preview": "large" },
   },
-  verification: {
-    google: "iWN8aSB_3e63MjldmmHm94h4P8VuFk5_35XrkqlE7Mg",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    siteName: siteConfig.name,
+    url: siteConfig.url,
+    title: homeTitle,
+    description: siteConfig.description,
+    images: [defaultOgImage],
   },
+  twitter: { card: "summary_large_image", title: homeTitle, description: siteConfig.description, images: [defaultOgImage.url] },
+  icons: {
+    icon: [
+      { url: "/img/icon-32.png", sizes: "32x32", type: "image/png" },
+      { url: "/img/icon-192.png", sizes: "192x192", type: "image/png" },
+    ],
+    apple: { url: "/img/apple-touch-icon.png", sizes: "180x180" },
+  },
+  verification: { google: "y4LW6XGXq0uqSxa1G62aDdr2d4GIZxqL2vjahrnh_AY" },
 };
 
+/**
+ * Service-area business: no street address (the GBP hides it too), so only
+ * locality/region/postal code plus `geo` for the Sealy origin. Inventing a
+ * street address to silence a Rich Results warning would put a wrong address
+ * in Google's index.
+ */
 const localBusinessSchema = {
   "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "@id": "https://www.nolimitpolishing.com",
-  name: "No Limit Polishing",
-  description:
-    "Professional aluminum wheel polishing in College Station & Houston, TX. Services include machine sand & polish, acid wash, ceramic coating, curb rash repair, and powder coat removal.",
-  url: "https://www.nolimitpolishing.com",
-  telephone: "+18324663104",
-  image: "https://www.nolimitpolishing.com/images/img5.jpg",
+  "@type": "AutoBodyShop",
+  "@id": businessId,
+  name: siteConfig.name,
+  description: siteConfig.description,
+  url: siteConfig.url,
+  telephone: siteConfig.phone,
+  email: siteConfig.email,
+  image: `${siteConfig.url}${defaultOgImage.url}`,
+  logo: `${siteConfig.url}/img/logo-512.jpg`,
   priceRange: "$$",
   currenciesAccepted: "USD",
-  paymentAccepted: "Cash, Credit Card, Venmo, Zelle",
-  areaServed: [
-    { "@type": "City", name: "College Station", containedIn: { "@type": "State", name: "Texas" } },
-    { "@type": "City", name: "Bryan", containedIn: { "@type": "State", name: "Texas" } },
-    { "@type": "City", name: "Houston", containedIn: { "@type": "State", name: "Texas" } },
-    { "@type": "City", name: "Katy", containedIn: { "@type": "State", name: "Texas" } },
-    { "@type": "City", name: "Sugar Land", containedIn: { "@type": "State", name: "Texas" } },
-  ],
-  address: [
-    {
-      "@type": "PostalAddress",
-      addressLocality: "College Station",
-      addressRegion: "TX",
-      addressCountry: "US",
-    },
-    {
-      "@type": "PostalAddress",
-      addressLocality: "Houston",
-      addressRegion: "TX",
-      addressCountry: "US",
-    },
-  ],
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: siteConfig.city,
+    addressRegion: siteConfig.region,
+    postalCode: siteConfig.postalCode,
+    addressCountry: "US",
+  },
+  geo: { "@type": "GeoCoordinates", latitude: siteConfig.geo.lat, longitude: siteConfig.geo.lng },
+  areaServed: siteConfig.serviceAreas.map((c) => ({ "@type": "City", name: `${c}, TX` })),
+  openingHoursSpecification: [{ "@type": "OpeningHoursSpecification", ...siteConfig.hoursSchema }],
+  founder: { "@type": "Person", name: siteConfig.founder },
+  employee: { "@type": "Person", name: siteConfig.owner, jobTitle: "Owner" },
   hasOfferCatalog: {
     "@type": "OfferCatalog",
-    name: "Wheel Polishing Services",
-    itemListElement: [
-      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Acid Wash & Polish" } },
-      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Full Sand & Polish" } },
-      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Ceramic Coating" } },
-      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Curb Rash Repair" } },
-      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Lip Re-Engraving" } },
-      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Clear Coat Removal" } },
-      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Powder Coat & Anodizing Removal" } },
-    ],
+    name: "Aluminum wheel polishing services",
+    itemListElement: services.map((s) => ({
+      "@type": "Offer",
+      itemOffered: { "@type": "Service", name: s.name, url: `${siteConfig.url}/services/${s.slug}` },
+    })),
   },
-  sameAs: [
-    "https://www.instagram.com/no_limit_polishing/",
-    "https://www.tiktok.com/@no_limit_polishing",
-  ],
+  sameAs: [siteConfig.social.facebook, siteConfig.social.instagram, siteConfig.social.tiktok],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={geist.variable}>
-      <head>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
-        />
-      </head>
-      <body className="min-h-screen flex flex-col bg-white text-black">
-        <Navbar />
-        <main className="flex-1">{children}</main>
+    <html lang="en" className={GeistSans.variable}>
+      <body className="flex min-h-screen flex-col bg-white text-black">
+        <JsonLd data={localBusinessSchema} />
+        <SkipLink />
+        <Navbar phoneDisplay={siteConfig.phoneDisplay} phoneHref={telHref} />
+        <main id="main-content" tabIndex={-1} className="flex-1">
+          {children}
+        </main>
         <Footer />
-        <ChatWidget />
+        <aside aria-label="Quick contact and accessibility tools">
+          <MobileCallBar />
+          <ChatWidget />
+          <AccessibilityWidget />
+        </aside>
+        {/* Cookieless — no consent banner needed. Turn Web Analytics ON in the
+            Vercel dashboard (project → Analytics → Enable) or this collects nothing. */}
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

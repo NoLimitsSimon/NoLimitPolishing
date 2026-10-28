@@ -1,178 +1,68 @@
 import Link from "next/link";
+import PageHeader from "@/components/PageHeader";
+import FaqList from "@/components/FaqList";
+import JsonLd from "@/components/JsonLd";
+import CtaBand from "@/components/CtaBand";
+import { pageMeta, faqSchema, siteConfig } from "@/lib/data/site";
 
-export const metadata = {
-  title: "FAQ — Wheel Polishing Questions Answered | No Limit Polishing TX",
+export const metadata = pageMeta({
+  title: "Wheel Polishing FAQ — Cost, Timing, Drop-Off",
   description:
-    "Common questions about aluminum wheel polishing in Texas. How much does wheel polishing cost? How long does it take? Do you come to me? No Limit Polishing answers it all.",
-  alternates: { canonical: "/faq" },
-};
+    "How much wheel polishing costs, how long it takes, where to drop off in Sealy, TX, what wheels we work on and how to book. Straight answers from No Limit Polishing.",
+  path: "/faq",
+});
 
-const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: [
-    {
-      "@type": "Question",
-      name: "How much does wheel polishing cost in Texas?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Every job is custom-quoted based on wheel size, current condition, and scope of work. Factors include whether you need inside and outside polishing, curb rash repair, ceramic coating, or powder coat removal. Contact No Limit Polishing at (832) 466-3104 for a free quote.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "How long does wheel polishing take?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Turnaround depends on the scope. An acid wash on a set of four wheels moves quickly. A full inside-and-outside machine sand and polish on oversized wheels takes more time. We give you an honest turnaround estimate when we quote the job.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Where can I get my wheels polished near me in Houston TX?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "No Limit Polishing serves the greater Houston, TX area including Katy, Sugar Land, and surrounding communities. Call or text (832) 466-3104 to schedule. We work out of our Houston location and offer mobile service for larger jobs.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Where can I get my wheels polished near me in College Station TX?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "No Limit Polishing is based in College Station, TX and serves Bryan, College Station, and surrounding areas. Call or text (832) 466-3104 to get a free quote and schedule your appointment.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Do you come to me or do I bring my wheels to you?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "We work out of our locations in College Station and Houston, TX. Bring your wheels to us and we handle everything from there. Mobile service is available on a case-by-case basis for larger jobs — reach out and we can talk through the details.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Can you polish stock factory wheels or only aftermarket wheels?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "We work on both. Stock factory aluminum wheels are some of our most common jobs. If it's aluminum, we can polish it — whether it came on the truck from the factory or it's a high-end forged set. The process is the same either way.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "What is the difference between acid wash and full sand and polish?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Acid wash is a chemical process that strips oxidation, brake dust, and road grime — it refreshes the surface but doesn't remove scratches or deep damage. Full sand and polish uses professional-grade machine sanding to remove every scratch and imperfection, producing a true mirror finish. Acid wash is faster and less expensive; full sand and polish is the premium result.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Can you fix curb rash on my wheels?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Yes. We sand out the curb rash damage, blend the area, and polish it to match the rest of the wheel. If the engraved brand lettering on the lip was damaged, we re-engrave it so it looks factory-correct. When we're done, you shouldn't be able to tell it happened.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "What is ceramic coating for wheels and is it worth it?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Ceramic coating is a hard, hydrophobic layer applied over a freshly polished aluminum surface. It repels brake dust, road grime, and oxidation, significantly extending the life of your polish. It must be paired with our Full Sand and Polish service. If you want your wheels to stay looking great longer, it's worth it.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Do you remove powder coat or clear coat before polishing?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Yes. Factory clear coat, aftermarket clear coat, powder coat, and anodized finishes all need to be fully removed before aluminum can be properly polished. We offer chemical and mechanical removal as a standalone service or as part of a full polishing job.",
-      },
-    },
-  ],
-};
+const groups: { heading: string; faqs: { question: string; answer: string }[] }[] = [
+  {
+    heading: "Pricing & booking",
+    faqs: [
+      { question: "How much does wheel polishing cost?", answer: `Every job is custom-quoted on wheel size, design, condition and scope — inside, outside or both, plus any repair, coating or coating removal. Text a photo to ${siteConfig.phoneDisplay} for the fastest straight number. No hidden fees.` },
+      { question: "How do I book?", answer: `Send the quote form, or call or text ${siteConfig.phoneDisplay}. Every request is reviewed personally, and your appointment is confirmed before anything is locked in.` },
+      { question: "What are your hours?", answer: "By appointment, Monday through Saturday, 8 AM to 6 PM. Closed Sunday." },
+    ],
+  },
+  {
+    heading: "Location & drop-off",
+    faqs: [
+      { question: "Where are you located?", answer: `We're in ${siteConfig.city}, TX ${siteConfig.postalCode}, on I-10 between Houston and Columbus. We work by appointment, so drop-off details are sent when your appointment is confirmed.` },
+      { question: "Do you still have College Station and Houston locations?", answer: "No. The business moved to Sealy in 2026. Houston-area customers are still served — Katy and the west side are a short drive — and mobile service is available for larger jobs." },
+      { question: "Do you come to me?", answer: "Mostly drop-off. Mobile service is available case by case for larger jobs, like several trucks or a full set of duallies. Ask when you request a quote." },
+    ],
+  },
+  {
+    heading: "Wheels & results",
+    faqs: [
+      { question: "What kinds of wheels do you polish?", answer: "Aluminum wheels: stock factory wheels, forged aftermarket sets, dually fronts and rears, and semi wheels. We don't polish chrome-plated wheels — that's plating, not aluminum." },
+      { question: "How long does a job take?", answer: "It depends on scope. An acid wash and polish on a set of four moves quickly; a full inside-and-out sand and polish on a forged set with a deep lip takes longer. You'll get an honest turnaround with your quote." },
+      { question: "How long will the shine last?", answer: "Uncoated polished aluminum slowly oxidizes again; how fast depends on washing, weather and miles. Ceramic coating over a fresh full sand and polish makes it last much longer between touch-ups." },
+    ],
+  },
+];
 
-export default function FAQPage() {
+export default function FaqPage() {
   return (
-    <div className="bg-white">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+    <>
+      <JsonLd data={faqSchema(groups.flatMap((g) => g.faqs))} />
+      <PageHeader
+        eyebrow="Got Questions"
+        title="Wheel Polishing FAQ"
+        lead={`Still have a question? Call or text ${siteConfig.phoneDisplay}.`}
+        crumbs={[{ name: "Home", path: "/" }, { name: "FAQ", path: "/faq" }]}
       />
-
-      {/* HEADER */}
-      <section className="pt-40 pb-16 px-4 text-center">
-        <div className="max-w-3xl mx-auto">
-          <p className="text-[#1e90ff] text-xs font-bold tracking-[0.3em] uppercase mb-4">Got Questions</p>
-          <h1 className="text-5xl sm:text-6xl font-black uppercase tracking-tight text-black mb-6">FAQ</h1>
-          <p className="text-black/50 text-base leading-relaxed max-w-xl mx-auto">
-            Everything you need to know about aluminum wheel polishing. Still have questions?{" "}
-            <a href="tel:8324663104" className="text-[#1e90ff] font-semibold hover:underline">(832) 466-3104</a>.
+      <section className="px-4 py-16">
+        <div className="mx-auto max-w-3xl space-y-14">
+          {groups.map((g) => (
+            <div key={g.heading}>
+              <h2 className="mb-6 text-2xl font-black uppercase tracking-tight text-black">{g.heading}</h2>
+              <FaqList faqs={g.faqs} />
+            </div>
+          ))}
+          <p className="text-sm text-black/75">
+            Service-specific questions are answered on each <Link href="/services" className="font-semibold text-[var(--blue-ink)] underline">service page</Link>, and the <Link href="/guides" className="font-semibold text-[var(--blue-ink)] underline">wheel care guides</Link> go deeper.
           </p>
         </div>
       </section>
-
-      {/* FAQ LIST */}
-      <section className="pb-24 px-4">
-        <div className="max-w-3xl mx-auto space-y-3">
-          {faqSchema.mainEntity.map((faq) => (
-            <details key={faq.name} className="group border border-black/5 bg-[#f8f8f8] rounded-xl overflow-hidden shadow-sm">
-              <summary className="flex items-center justify-between p-6 cursor-pointer font-bold text-sm tracking-wide text-black hover:text-[#1e90ff] transition-colors list-none">
-                {faq.name}
-                <span className="text-[#1e90ff] group-open:rotate-45 transition-transform duration-200 text-xl flex-shrink-0 ml-4">+</span>
-              </summary>
-              <div className="px-6 pb-6 text-black/60 text-sm leading-relaxed border-t border-black/5 pt-5 bg-white">
-                {faq.acceptedAnswer.text}
-              </div>
-            </details>
-          ))}
-        </div>
-      </section>
-
-      {/* LOCATION CALLOUTS */}
-      <section className="py-20 px-4 bg-[#f5f5f5]">
-        <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-12">
-            <p className="text-[#1e90ff] text-xs font-bold tracking-[0.3em] uppercase mb-3">Where We Work</p>
-            <h2 className="text-3xl sm:text-4xl font-black uppercase tracking-tight text-black">Serving Texas</h2>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            {[
-              {
-                city: "Houston, TX",
-                areas: "Katy · Sugar Land · Pearland · The Woodlands · Pasadena · Friendswood",
-                desc: "Professional aluminum wheel polishing serving the greater Houston metro area. Call (832) 466-3104 for a free quote.",
-              },
-              {
-                city: "College Station, TX",
-                areas: "Bryan · Hearne · Caldwell · Brenham · Huntsville",
-                desc: "Wheel polishing specialists serving College Station, Bryan, and surrounding Brazos Valley communities.",
-              },
-            ].map((loc) => (
-              <div key={loc.city} className="bg-white border border-black/5 rounded-xl p-8 shadow-sm">
-                <h3 className="font-black uppercase tracking-wide text-black text-xl mb-2">{loc.city}</h3>
-                <p className="text-[#1e90ff] text-xs font-bold tracking-wide mb-3">{loc.areas}</p>
-                <p className="text-black/50 text-sm leading-relaxed">{loc.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="py-24 px-4 bg-white text-center">
-        <h2 className="text-4xl font-black uppercase tracking-tight text-black mb-6">Ready to get a quote?</h2>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link href="/contact" className="glow-btn bg-[#1e90ff] text-white font-black text-sm px-10 py-4 rounded tracking-widest uppercase">
-            Request an Appointment
-          </Link>
-          <a href="tel:8324663104" className="border border-black/20 hover:border-[#1e90ff] text-black font-bold text-sm px-10 py-4 rounded tracking-widest uppercase transition-all duration-200">
-            (832) 466-3104
-          </a>
-        </div>
-      </section>
-    </div>
+      <CtaBand />
+    </>
   );
 }

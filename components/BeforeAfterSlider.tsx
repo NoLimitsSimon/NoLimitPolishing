@@ -1,95 +1,67 @@
 "use client";
-import { useState, useEffect } from "react";
+
+import { useState } from "react";
 import Image from "next/image";
+import type { Photo } from "@/lib/data/types";
 
-const pairs = [
-  {
-    before: "/images/b4.jpg",
-    after:  "/images/a4_new.jpg",
-    afterPosition: "center 30%",
-  },
-  {
-    before: "/images/b3.jpg",
-    after:  "/images/a3.jpg",
-    afterPosition: "center center",
-  },
-  {
-    before: "/images/b2.jpg",
-    after:  "/images/a2.jpg",
-    afterPosition: "center center",
-  },
-  {
-    before: "/images/b1.jpg",
-    after:  "/images/after1_new.jpg",
-    afterPosition: "center center",
-  },
-];
+type Pair = { label: string; before: Photo; after: Photo };
 
-export default function BeforeAfterSlider() {
-  const [index, setIndex] = useState(0);
-  const [animating, setAnimating] = useState(false);
-
-  useEffect(() => {
-    const t = setInterval(() => advance(1), 5000);
-    return () => clearInterval(t);
-  }, [index]);
-
-  const advance = (dir: number) => {
-    if (animating) return;
-    setAnimating(true);
-    setTimeout(() => {
-      setIndex((i) => (i + dir + pairs.length) % pairs.length);
-      setAnimating(false);
-    }, 300);
-  };
-
-  const pair = pairs[index];
+/**
+ * Before/after viewer. No auto-advance (the old one rotated every 5 s with no
+ * pause — WCAG 2.2.2) and real alt text instead of "Before" / "After".
+ */
+export default function BeforeAfterSlider({ pairs }: { pairs: Pair[] }) {
+  const [i, setI] = useState(0);
+  const pair = pairs[i];
+  const go = (d: number) => setI((n) => (n + d + pairs.length) % pairs.length);
 
   return (
-    <div className="relative">
-      <div className={`grid grid-cols-2 gap-2 rounded-2xl overflow-hidden border border-black/5 shadow-lg transition-opacity duration-300 ${animating ? "opacity-0" : "opacity-100"}`}>
-        {/* BEFORE */}
-        <div className="relative" style={{ aspectRatio: "3/4" }}>
-          <Image
-            src={pair.before}
-            alt="Before"
-            fill
-            className="object-cover object-center"
-            priority
-          />
-          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent py-4 px-5">
-            <span className="text-white/80 font-black text-sm tracking-widest uppercase">Before</span>
-          </div>
+    <div>
+      <figure>
+        <div className="grid grid-cols-2 gap-2 overflow-hidden rounded-2xl border border-black/10 shadow-lg">
+          {(["before", "after"] as const).map((side) => (
+            <div key={side} className="relative aspect-[3/4]">
+              <Image
+                src={pair[side].src}
+                alt={pair[side].alt}
+                fill
+                sizes="(max-width: 1024px) 50vw, 480px"
+                className="object-cover"
+                
+              />
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent px-5 py-4">
+                <span className={`text-sm font-black uppercase tracking-widest ${side === "after" ? "text-[#4da8ff]" : "text-white"}`}>
+                  {side === "before" ? "Before" : "After"}
+                </span>
+              </div>
+            </div>
+          ))}
         </div>
-
-        {/* AFTER */}
-        <div className="relative" style={{ aspectRatio: "3/4" }}>
-          <Image
-            src={pair.after}
-            alt="After"
-            fill
-            className="object-cover"
-            style={{ objectPosition: pair.afterPosition }}
-            priority
-          />
-          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent py-4 px-5">
-            <span className="text-[#1e90ff] font-black text-sm tracking-widest uppercase">After</span>
-          </div>
+        <figcaption aria-live="polite" className="mt-4 text-sm font-semibold text-black/75">
+          {pair.label} <span className="text-black/60">({i + 1} of {pairs.length})</span>
+        </figcaption>
+      </figure>
+      <div className="mt-4 flex items-center justify-end gap-3">
+        <button type="button" onClick={() => go(-1)} aria-label="Previous before and after" className="flex h-11 w-11 items-center justify-center rounded-full border border-black/20 text-black/70 hover:border-[var(--blue-ink)] hover:text-[var(--blue-ink)]">
+          <span aria-hidden="true">←</span>
+        </button>
+        <div className="flex gap-1.5">
+          {pairs.map((p, n) => (
+            <button
+              key={p.label}
+              type="button"
+              onClick={() => setI(n)}
+              aria-label={`Show ${p.label}`}
+              aria-current={n === i ? "true" : undefined}
+              className="flex h-11 items-center px-1"
+            >
+              <span className={`block h-1.5 rounded-full transition-all duration-300 ${n === i ? "w-6 bg-[var(--blue-ink)]" : "w-1.5 bg-black/30"}`} />
+            </button>
+          ))}
         </div>
-      </div>
-
-      {/* Nav */}
-      <div className="flex items-center justify-end mt-5 px-1">
-        <div className="flex items-center gap-3">
-          <button onClick={() => advance(-1)} className="w-8 h-8 rounded-full border border-black/10 flex items-center justify-center hover:border-[#1e90ff] hover:text-[#1e90ff] transition-colors text-black/40 text-sm">←</button>
-          <div className="flex gap-1.5">
-            {pairs.map((_, i) => (
-              <button key={i} onClick={() => setIndex(i)}
-                className={`h-1.5 rounded-full transition-all duration-300 ${i === index ? "w-6 bg-[#1e90ff]" : "w-1.5 bg-black/15"}`} />
-            ))}
-          </div>
-          <button onClick={() => advance(1)} className="w-8 h-8 rounded-full border border-black/10 flex items-center justify-center hover:border-[#1e90ff] hover:text-[#1e90ff] transition-colors text-black/40 text-sm">→</button>
-        </div>
+        <button type="button" onClick={() => go(1)} aria-label="Next before and after" className="flex h-11 w-11 items-center justify-center rounded-full border border-black/20 text-black/70 hover:border-[var(--blue-ink)] hover:text-[var(--blue-ink)]">
+          <span aria-hidden="true">→</span>
+        </button>
       </div>
     </div>
   );

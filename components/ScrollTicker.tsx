@@ -2,25 +2,25 @@ const items = [
   "Acid Wash & Polish",
   "Full Sand & Polish",
   "Curb Rash Repair",
-  "Re-Engraving",
+  "Lip Re-Engraving",
+  "Ceramic Coating",
+  "Sealy TX",
+  "Katy",
+  "Bellville",
+  "Columbus",
   "Mirror Finish",
-  "College Station",
-  "Houston TX",
-  "No Limit Polishing",
 ];
 
-const DOT = (
-  <span className="mx-6 text-[#1e90ff] text-xl select-none">✦</span>
-);
-
+/** Decorative marquee — hidden from screen readers, frozen under reduced motion. */
 export default function ScrollTicker() {
   const doubled = [...items, ...items];
   return (
-    <div className="overflow-hidden bg-[#050505] py-4 border-y border-white/5">
+    <div aria-hidden="true" className="overflow-hidden border-y border-white/5 bg-[#050505] py-4">
       <div className="ticker-track flex whitespace-nowrap">
         {doubled.map((item, i) => (
-          <span key={i} className="flex items-center text-white/50 text-xs font-black tracking-[0.3em] uppercase shrink-0">
-            {item}{DOT}
+          <span key={i} className="flex shrink-0 items-center text-xs font-black uppercase tracking-[0.3em] text-white/60">
+            {item}
+            <span className="mx-6 select-none text-xl text-[#1e90ff]">✦</span>
           </span>
         ))}
       </div>
